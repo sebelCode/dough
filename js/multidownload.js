@@ -2,24 +2,23 @@ var tempLink = document.createElement('a');
 document.body.appendChild(tempLink);
 
 export function downloadMultipleFiles(fileUrls) {
+
+    console.log("Beginning the multidownload")
     var fileIndex = 0
-    setTimeout(function() {
+
+    setInterval(function() {
 
         var fileUrl = fileUrls[fileIndex];
+        console.log(fileIndex, fileUrl)
         tempLink.setAttribute('href', fileUrl);
-        tempLink.setAttribute('download', fileUrl);
+        tempLink.setAttribute('download', `sprite${fileIndex}`);
         tempLink.click();
         
-        if(fileIndex > -1) {
-            fileUrls.splice(fileIndex, 1);
-        }
-        
-        if(fileUrls.length > 0) {
-            downloadMultipleFiles(fileUrls);
-        } else {
-            document.body.removeChild(tempLink);
-        }
         fileIndex += 1
 
-    }, 200); // if less than 200, not all files are downloaded in Firefox
+        if (fileIndex >= fileUrl.length) {
+            clearInterval()
+        }
+
+    }, 1500); // if less than 200, not all files are downloaded in Firefox
 }

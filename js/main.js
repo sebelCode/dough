@@ -30,6 +30,8 @@ let yOffset = -210
 
 async function reload() {
 
+    console.log("Reloading..")
+
     const imgPath = inputImagePath.value
     const jsonPath = inputJSONPath.value
 
@@ -56,7 +58,7 @@ async function reload() {
 }
 
 reloadButton.addEventListener("mousedown", e => {
-
+    
     try{
         reload()
     } catch(e) {
@@ -105,22 +107,30 @@ document.addEventListener("mousemove", e => {
 
 })
 
-async function getSpriteLinks() {
-    const links = []
+function getSpriteLinks() {
 
-    for (let i = 0; i < spriteSlider.max; i++) {
-        spriteSlider.value = i
-        draw()
+    console.log("Getting sprite links..")
 
-        canvas.toBlob((blob) => {
-            const url = URL.createObjectURL(blob);
-            links.push(url)
-            console.log(url)
-        }, "image/png")
-    }  
+    return new Promise((resolve, reject) => {
+        
+        var links = []
+    
+        for (let i = 0; i <= spriteSlider.max; i++) {
+            console.log(i, "/", spriteSlider.max)
+            spriteSlider.value = i
+            draw()
+    
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                links.push(url)
+            }, "image/png")
+        }  
+    
+        spriteSlider.value = 0
+        console.log("resolving with", links)
+        resolve(links)
 
-    spriteSlider.value = 0
-    return links
+    })
 }
 
 inputOffsetX.addEventListener("change", () => {
@@ -132,11 +142,11 @@ inputOffsetY.addEventListener("change", () => {
 })
 
 document.getElementById("downloadall").addEventListener("mousedown", e => {
-    var links = getSpriteLinks()
 
-    setTimeout(() => {
-        downloadMultipleFiles(links)
-    }, 1000);
+    var proceed = confirm(`All ${currentBxcad.sprites.length} sprites will be downloaded one by one with the current transform. Continue?`)
+    if (!proceed) return
+
+    getSpriteLinks().then((fileUrls) => downloadMultipleFiles(fileUrls))
 })
 
 function draw() {
