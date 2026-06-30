@@ -2,6 +2,7 @@
 
 import { Brcad } from "./bread.js";
 import { loadImage, loadJSON } from "./loaders.js";
+import { downloadMultipleFiles } from "./multidownload.js";
 
 // Wait for the document to load
 await new Promise((resolve, reject) => {document.addEventListener("DOMContentLoaded", resolve)})
@@ -104,6 +105,24 @@ document.addEventListener("mousemove", e => {
 
 })
 
+async function getSpriteLinks() {
+    const links = []
+
+    for (let i = 0; i < spriteSlider.max; i++) {
+        spriteSlider.value = i
+        draw()
+
+        canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            links.push(url)
+            console.log(url)
+        }, "image/png")
+    }  
+
+    spriteSlider.value = 0
+    return links
+}
+
 inputOffsetX.addEventListener("change", () => {
     xOffset = inputOffsetX.value
 })
@@ -112,8 +131,16 @@ inputOffsetY.addEventListener("change", () => {
     yOffset = inputOffsetY.value
 })
 
-function update() {
+document.getElementById("downloadall").addEventListener("mousedown", e => {
+    var links = getSpriteLinks()
 
+    setTimeout(() => {
+        downloadMultipleFiles(links)
+    }, 1000);
+})
+
+function draw() {
+    
     ctx.resetTransform()
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     
@@ -130,7 +157,11 @@ function update() {
         ctx.font = "10px serif"
         ctx.fillText("ERROR", 60, 60)
     }
+}
 
+function update() {
+
+    draw()
     requestAnimationFrame(update)
 
 }
