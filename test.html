@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<!-- File for previewing BXCAD animations and sprites-->
+
+<html>
+
+    <head>
+
+        <script type="module">
+            
+            await new Promise((resolve, reject) => {
+                document.addEventListener("DOMContentLoaded", resolve)
+            })
+
+            console.log("loaded")
+
+            const f = await fetch("sprites/shootemup3ds/shooting_00.bccad")
+            const bytes = await f.bytes()
+
+            console.log(bytes)
+
+        </script>
+
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+
+        <input type="text" id="url">
+
+    </body>
+
+</html>

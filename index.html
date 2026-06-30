@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<!-- File for previewing BXCAD animations and sprites-->
+
+<html>
+
+    <head>
+
+        <script src="js/spritepreview.js" type="module"></script>
+
+        <link rel="stylesheet" href="style.css">
+
+    </head>
+
+    <body>
+
+        <h2>Rhythm Heaven Fever/Megamix BXCAD Preview</h2>
+        <h1>Dough</h1>
+        
+        <input type="text" id="imgPath" value="sprites/shootemup3ds/shooting_00.png">
+        <label for="imgPath">Image</label>
+
+        <br>
+
+        <input type="text" id="jsonPath" value="sprites/shootemup3ds/shooting_00.json">
+        <label for="jsonPath">JSON</label>
+        
+        <br>
+        <button id="loadButton">Load</button>
+        <br>
+        <br>
+
+        <canvas id="canvas" width="960" height="540"></canvas>
+        <br>
+
+        <br>
+        <br>
+        <input type="range" min="0" max="10" id="spriteSlider" style="min-width: 30%;">
+        <input type="number" min="0" max="10" id="spriteNum" style="min-width: 10%;">
+        <label for="spriteSlider">Sprite</label>
+
+        <br>
+        <br>
+
+        <input type="number" id="offsetX">
+        <label for="offsetX">X</label>
+        <input type="number" id="offsetY">
+        <label for="offsetY">Y</label>
+
+
+    </body>
+
+</html>

@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'Kurokane'; /*a name to be used later*/
+    src: url('fonts/kurokane.otf'); /*URL to font*/
+}
+
+body {
+    background-color: rgb(100, 100, 100);
+    color: white;
+
+    margin: 20px 20px;
+    line-height: 1.5;
+    font-family: "Kurokane";
+}
+
+input[type=text] {
+    min-width: 30%;
+}
+
+input[type=number] {
+    width: 55px;
+}
+
+canvas {
+    border: 2px;
+    border-style: solid;
+    border-color: black;
+}
+
+h2 {
+    color: gray;
+}
+
