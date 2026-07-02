@@ -1,7 +1,7 @@
 var tempLink = document.createElement('a');
 document.body.appendChild(tempLink);
 
-export function downloadMultipleFiles(fileUrls) {
+export function downloadMultipleFiles(fileUrls, interval) {
 
     console.log("Beginning the multidownload")
     var fileIndex = 0
@@ -20,5 +20,5 @@ export function downloadMultipleFiles(fileUrls) {
             clearInterval()
         }
 
-    }, 1500); // if less than 200, not all files are downloaded in Firefox
+    }, interval); // if less than 200, not all files are downloaded in Firefox
 }

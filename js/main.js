@@ -143,10 +143,10 @@ inputOffsetY.addEventListener("change", () => {
 
 document.getElementById("downloadall").addEventListener("mousedown", e => {
 
-    var proceed = confirm(`All ${currentBxcad.sprites.length} sprites will be downloaded one by one with the current transform. Continue?`)
+    var proceed = confirm(`All ${currentBxcad.sprites.length} sprites will be downloaded one by one with the current transform. Set your browser to automatically set a download directory without asking. Continue?`)
     if (!proceed) return
 
-    getSpriteLinks().then((fileUrls) => downloadMultipleFiles(fileUrls))
+    getSpriteLinks().then((fileUrls) => downloadMultipleFiles(fileUrls, 200))
 })
 
 function draw() {
